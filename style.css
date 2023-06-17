@@ -1,24 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Swash:wght@700&display=swap');
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: 'Cherry Swash', cursive;
 }
 
 body {
-  background-color: #8ECAE6;
+  background-color: #023047;
 }
 
 .header {
-  color: whitesmoke;
+  color: #023047;
   text-align: center;
+  font-size: 20px;
 }
 
 .header h1 {
-  font-size: 40px;
-  color: whitesmoke;
+  font-size: 50px;
+  color: #023047;
   text-align: center;
   padding-top: 10px;
 }
@@ -47,13 +46,13 @@ body {
   padding-top: 10px;
   border-radius: 7px;
   text-align: center;
-  background-color: rgb(226, 231, 235);
+  background-color: #8ECAE6;
 }
 
 #reset {
-  background-color: #023047;
-  color: azure;
-  font-size: 150%;
+  background-color: #FFB703;
+  color: #023047;
+  font-size: 200%;
   border-style: none;
   border-radius: 10px;
   text-align: center;
