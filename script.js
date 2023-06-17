@@ -46,3 +46,23 @@ const jogar = (event) => {
 };
 
 // Função que recebe de quem foi o turno e verifica se houve algum ganhador
+const verifyWinner = (players) => {
+  // Verifica todas as possiveis combinacoes
+  for(let index = 0; index < winArray.length; index += 1){
+    const combinacaoAtual = winArray[index];
+    let score = 0;
+
+    // Percorre todos os elementos de cada combinacao
+    for (let index = 0; index < combinacaoAtual.length; index += 1) {
+      const idCelula = combinacaoAtual[index];
+      const celula = document.getElementById(idCelula);
+
+      if(celula.innerText === players){
+        pontuacao += 1;
+      }
+      if(pontuacao >= 3){
+        player.innerText = `Jogador ${players} ganhou!'`
+      }
+    }
+  }
+};
