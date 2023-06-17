@@ -11,9 +11,11 @@ const winArray = [
 ];
 
 // Função para gerar de maneira dinâmica '9 div' (locais para jogar X ou O)
+const divGrid = document.querySelector(".grid");
 const createDivs = () => {
   for (let index = 0; index < 9; index += 1) {
     const div = document.createElement("div");
+    div.classList.add("celula");
     div.id = index;
     div.addEventListener("click", jogar);
     divGrid.appendChild(div);
@@ -23,14 +25,13 @@ createDivs();
 
 // Função jogar que vai receber o evento "click"
 const player = document.querySelector("#player");
-let turn = true;
-
-const jogar = (event) => {
-  const targetClick = event.target;
+let turno = true;
+function jogar(event) {
+  const alvoClicado = event.target;
   let jogador;
   let proximoJogador;
 
-  if (turn === true) {
+  if (turno === true) {
     jogador = "X";
     proximoJogador = "O";
   } else {
@@ -38,31 +39,58 @@ const jogar = (event) => {
     proximoJogador = "X";
   }
 
-  if (targetClick.innerText === "") {
-    player.innerText = `Vez do Jogador ${proximoJogador}`;
-    targetClick.innerText = jogador;
-    turn = !turn;
+  if (alvoClicado.innerText === "") {
+    player.innerText = `Vez do jogador ${proximoJogador}`;
+    alvoClicado.innerText = jogador;
+    turno = !turno;
   }
-};
+  verificarGanhador(jogador);
+  verificarEmpate();
+}
 
 // Função que recebe de quem foi o turno e verifica se houve algum ganhador
-const verifyWinner = (players) => {
+function verificarGanhador(jogador) {
   // Verifica todas as possiveis combinacoes
-  for(let index = 0; index < winArray.length; index += 1){
+  for (let index = 0; index < winArray.length; index += 1) {
     const combinacaoAtual = winArray[index];
-    let score = 0;
+    let pontuacao = 0;
 
     // Percorre todos os elementos de cada combinacao
     for (let index = 0; index < combinacaoAtual.length; index += 1) {
       const idCelula = combinacaoAtual[index];
       const celula = document.getElementById(idCelula);
 
-      if(celula.innerText === players){
+      if (celula.innerText === jogador) {
         pontuacao += 1;
       }
-      if(pontuacao >= 3){
-        player.innerText = `Jogador ${players} ganhou!'`
+      if (pontuacao >= 3) {
+        player.innerText = `Jogador ${jogador} ganhou!`;
       }
+    }
+  }
+}
+
+// Função para limpar as células do jogo
+const limparCelulas = () => {
+  const celulas = document.querySelectorAll(".celula");
+  for (let index = 0; index < celulas.length; index += 1) {
+    celulas[index].innerText = "";
+  }
+};
+const btnReset = document.querySelector("#reset");
+btnReset.addEventListener("click", limparCelulas);
+
+// Função que verifique se deu empate
+const verificarEmpate = () => {
+  const celulas = document.querySelectorAll(".celula");
+  let contador = 0;
+
+  for (let index = 0; index < celulas.length; index += 1) {
+    if (celulas[index].innerText !== "") {
+      contador += 1;
+    }
+    if (contador >= 9) {
+      player.innerText = "Jogo empatou !";
     }
   }
 };
